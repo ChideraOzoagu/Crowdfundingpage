@@ -3,6 +3,9 @@ const menuOpen = document.querySelector(".menu-open");
 const menuClose = document.querySelector(".menu-close");
 const navContainer = document.querySelector(".nav-container");
 const navLinks = document.querySelector(".nav-links");
+const projectBtn = document.querySelector(".project-button");
+const pledgeBtns = document.querySelectorAll(".flex-product-head");
+const continueBtns = document.querySelectorAll(".continue-btn");
 
 menuBtn.addEventListener("click", navToggle);
 menuClose.style.display = "none";
@@ -29,8 +32,27 @@ function navToggle() {
   }
 }
 
+// BOOKMARK
+let bookmarked = false;
+const bookmark = document.querySelector(".bookmark p");
+const circle = document.querySelector("circle");
+const path = document.querySelector('path');
+bookmark.addEventListener("click", () => {
+  bookmarked = !bookmarked;
+  if (bookmarked) {
+    bookmark.textContent = `Bookmarked`;
+    bookmark.style.color = "hsl(176, 72%, 28%)";
+    circle.style.fill = 'hsl(176, 72%, 28%)';
+    path.style.fill = 'white';
+  } else {
+    bookmark.textContent = `Bookmark`;
+    bookmark.style.color = "hsl(0, 0%, 48%)";
+    circle.style.fill = 'black';
+    path.style.fill = 'hsl(0, 0%, 48%)';
+  }
+});
+
 // SHOW MODAL
-const projectBtn = document.querySelector(".project-button");
 projectBtn.addEventListener("click", () => {
   const modalContainer =
     projectBtn.parentElement.closest(".main-container").nextElementSibling;
@@ -50,105 +72,60 @@ projectBtn.addEventListener("click", () => {
 });
 
 // SHOW PLEDGES
-const pledgeBtns = document.querySelectorAll(".flex-product-head");
 pledgeBtns.forEach((pledgeBtn) => {
   pledgeBtn.addEventListener("click", () => {
     pledgeBtns.forEach((btns) => {
       btns.parentElement.parentElement.lastElementChild.classList.add(
         "pledge-container"
       );
+      btns.closest('.modal-inner').style.border = '1px solid hsl(0, 0%, 48%)';
     });
     pledgeBtn.parentElement.parentElement.lastElementChild.classList.remove(
       "pledge-container"
-    );
+      );
+      pledgeBtn.closest('.modal-inner').style.border = '2px solid hsl(176, 72%, 28%)'
   });
 });
 
-const blackStand = document.querySelector(".dollar75");
-
 // UPDATE AMOUNT PLEDGED
-// FIRST INPUT
-const rewardless = document.querySelector(".dollar10");
-
+// FIRST INPUTS
 let rewardlessValue;
-rewardless.addEventListener("input", rewardlessFunc);
-function rewardlessFunc() {
-  rewardlessValue = parseFloat(rewardless.value);
-  const continueBtn = rewardless.nextElementSibling;
-  if (rewardlessValue < 10 || isNaN(rewardlessValue)) {
-    errorFunc(rewardless, "Minimum pledge of $10");
-    continueBtn.addEventListener("click", () => {
-      const btn = continueBtn
-        .closest("body")
-        .querySelector(".appreciation-container");
-      btn.classList.remove("show-appreciation-container");
-      const closeModal = continueBtn.closest(".modal-container");
+continueBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const rewardless = btn.previousElementSibling;
+    rewardlessValue = parseFloat(rewardless.value);
+    if (rewardlessValue < 25 || isNaN(rewardlessValue)) {
+      errorFunc(rewardless, "Minimum pledge of $25");
+      const page = btn.closest("body").querySelector(".appreciation-container");
+      page.classList.remove("show-appreciation-container");
+      const closeModal = btn.closest(".modal-container");
       closeModal.style.display = "grid";
-    });
-  } else {
-    successFunc(rewardless, calculatePledge());
-    continueBtn.addEventListener("click", () => {
-      const btn = continueBtn
-        .closest("body")
-        .querySelector(".appreciation-container");
-      btn.classList.add("show-appreciation-container");
-      const closeModal = continueBtn.closest(".modal-container");
+    } else {
+      successFunc(rewardless, calculatePledge());
+      const page = btn.closest("body").querySelector(".appreciation-container");
+      page.classList.add("show-appreciation-container");
+      const closeModal = btn.closest(".modal-container");
       closeModal.style.display = "none";
-    });
-  }
-}
-// SECOND INPUT
-const bambooStand = document.querySelector(".dollar25");
-
-// let bambooStandValue;
-// bambooStand.addEventListener("change", bambooStandFunc);
-// function bambooStandFunc() {
-//   bambooStandValue = parseFloat(bambooStand.value);
-//   const continueBtn = rewardless.nextElementSibling;
-//   if (bambooStandValue < 10 || isNaN(bambooStandValue)) {
-//     errorFunc(bambooStand, "Minimum pledge of $25");
-//     continueBtn.addEventListener("click", () => {
-//       const btn = continueBtn
-//         .closest("body")
-//         .querySelector(".appreciation-container");
-//       btn.classList.remove("show-appreciation-container");
-//       const closeModal = continueBtn.closest(".modal-container");
-//       closeModal.style.display = "grid";
-//     });
-//   } else {
-//     successFunc(bambooStand, calculatePledge());
-   
-//     continueBtn.addEventListener("click", () => {
-//       const btn = continueBtn
-//         .closest("body")
-//         .querySelector(".appreciation-container");
-//       btn.classList.add("show-appreciation-container");
-//       const closeModal = continueBtn.closest(".modal-container");
-//       closeModal.style.display = "none";
-//     });
-//   }
-// }
-
-
+    }
+  });
+});
 
 // CALCULATE AND UPDATE PLEDGE
 function calculatePledge() {
-  if(rewardless  ) {
-    let totalAmount = document.querySelector(".total-amount-raised").textContent;
-    totalAmount = totalAmount.replace("$", "");
-    totalAmount = totalAmount.replace(",", "");
-    totalAmount = parseFloat(totalAmount);
-    let amount = totalAmount + rewardlessValue;
-    document.querySelector(".total-amount-raised").textContent =
-      "$" + amount.toLocaleString();
-  } 
+  let totalAmount = document.querySelector(".total-amount-raised").textContent;
+  totalAmount = totalAmount.replace("$", "");
+  totalAmount = totalAmount.replace(",", "");
+  totalAmount = parseFloat(totalAmount);
+  totalAmount += rewardlessValue;
+  document.querySelector(".total-amount-raised").textContent =
+    "$" + totalAmount.toLocaleString();
 
-  let totalPeople = document.querySelector('.total-people').textContent;
-  totalPeople = totalPeople.replace(',', '')
+  let totalPeople = document.querySelector(".total-people").textContent;
+  totalPeople = totalPeople.replace(",", "");
   totalPeople = parseInt(totalPeople);
-  let people = totalPeople + 1;
-  document.querySelector('.total-people').textContent = people.toLocaleString();
- 
+  totalPeople += 1;
+  document.querySelector(".total-people").textContent =
+    totalPeople.toLocaleString();
 }
 
 // HOME BTUTTON
@@ -175,5 +152,5 @@ function errorFunc(input, message) {
 function successFunc(input) {
   input.style.border = "1px solid hsl(0, 0%, 48%)";
   const errorText = input.parentElement.parentElement.querySelector("small");
-  errorText.innerHTML = '';
+  errorText.innerHTML = "";
 }

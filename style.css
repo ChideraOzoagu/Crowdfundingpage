@@ -199,6 +199,9 @@ body {
   align-items: center;
 }
 .bookmark p {
+  color: var(--clr-dark-gray);
+    padding-right: 1em;
+    font-weight: 700;
   display: none;
 }
 .progress {
@@ -531,9 +534,7 @@ input[type=number] {
   }
   .bookmark p {
     display: inline;
-    color: var(--clr-black);
-    padding-right: 1em;
-    font-weight: 700;
+    
   }
   .project-button:hover {
     background-color: var(--clr-dark-cyan);
