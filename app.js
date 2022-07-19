@@ -4,7 +4,7 @@ const menuClose = document.querySelector(".menu-close");
 const navContainer = document.querySelector(".nav-container");
 const navLinks = document.querySelector(".nav-links");
 const projectBtn = document.querySelector(".project-button");
-const pledgeBtns = document.querySelectorAll(".flex-product-head");
+const pledgeBtns = document.querySelectorAll(".modal-grid");
 const continueBtns = document.querySelectorAll(".continue-btn");
 const overlay = document.querySelector('.overlay');
 
@@ -65,15 +65,15 @@ projectBtn.addEventListener("click", () => {
 pledgeBtns.forEach((pledgeBtn) => {
   pledgeBtn.addEventListener("click", () => {
     pledgeBtns.forEach((btns) => {
-      btns.parentElement.parentElement.lastElementChild.classList.add(
+      btns.parentElement.lastElementChild.classList.add(
         "pledge-container"
       );
       btns.closest('.modal-inner').style.border = '1px solid hsl(0, 0%, 48%)';
     });
-    pledgeBtn.parentElement.parentElement.lastElementChild.classList.remove(
+    pledgeBtn.parentElement.lastElementChild.classList.remove(
       "pledge-container"
       );
-      pledgeBtn.closest('.modal-inner').style.border = '2px solid hsl(176, 72%, 28%)'
+      pledgeBtn.closest('.modal-inner').style.border = '2px solid hsl(176, 72%, 28%)';
   });
 });
 
