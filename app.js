@@ -6,6 +6,7 @@ const navLinks = document.querySelector(".nav-links");
 const projectBtn = document.querySelector(".project-button");
 const pledgeBtns = document.querySelectorAll(".flex-product-head");
 const continueBtns = document.querySelectorAll(".continue-btn");
+const overlay = document.querySelector('.overlay');
 
 menuBtn.addEventListener("click", navToggle);
 menuClose.style.display = "none";
@@ -17,15 +18,16 @@ function navToggle() {
     navContainer.classList.add("toggle-nav");
     menuOpen.style.display = "none";
     menuClose.style.display = "inline";
+    overlay.classList.add('show-overlay')
   
   } else {
     navContainer.classList.remove("toggle-nav");
     menuOpen.style.display = "inline";
     menuClose.style.display = "none";
+    overlay.classList.remove('show-overlay')
   }
- 
+
 }
-console.log();
 // BOOKMARK
 let bookmarked = false;
 const bookmark = document.querySelector(".bookmark p");
@@ -51,17 +53,11 @@ projectBtn.addEventListener("click", () => {
   const modalContainer =
     projectBtn.parentElement.closest(".main-container").nextElementSibling;
   modalContainer.style.display = "grid";
-  projectBtn
-    .closest("body")
-    .querySelector(".overlay")
-    .classList.add("show-overlay");
+  overlay.classList.add('show-overlay')
   const closeModal = modalContainer.querySelector(".modal-close");
   closeModal.addEventListener("click", () => {
     closeModal.closest(".modal-container").style.display = "none";
-    closeModal
-      .closest("body")
-      .querySelector(".overlay")
-      .classList.remove("show-overlay");
+    overlay.classList.remove('show-overlay')
   });
 });
 
@@ -131,10 +127,7 @@ homeBtn.addEventListener("click", homeFunc);
 function homeFunc() {
   const home = homeBtn.closest(".appreciation-container");
   home.classList.remove("show-appreciation-container");
-  home
-    .closest("body")
-    .querySelector(".overlay")
-    .classList.remove("show-overlay");
+ overlay.classList.remove('show-overlay')
 }
 // ERROR AND SUCCESS FUNCTION BASED ON INPUT
 // error function

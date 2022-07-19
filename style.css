@@ -57,10 +57,9 @@ body {
   position: absolute;
   inset: 0;
   width: 100%;
-  background-color: var(--clr-overlay);
   padding: 0 1rem;
   height: 0;
-  transform: translateX(100%);
+  transform: translateY(-100%);
   transition: all 0.2s ease-in-out;
   z-index: 10;
   overflow: hidden;
@@ -90,8 +89,9 @@ body {
   display: none;
 }
 .toggle-nav {
-  height: 100%;
-  transform: translateX(0);
+  transition: transform .3s ease-in;
+  height: 100vh;
+  transform: translateX(0);  
 }
 
 @media (min-width: 45em) {
@@ -103,6 +103,7 @@ body {
   .menu-btn {
     display: none;
   }
+  
   .header-container {
     display: flex;
     align-items: center;
