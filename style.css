@@ -44,7 +44,7 @@ body {
   justify-content: space-between;
   padding: 1.5rem 1rem;
   position: relative;
-  z-index: 100;
+  z-index: 15;
 }
 .menu-btn {
   background-color: transparent;
@@ -57,7 +57,7 @@ body {
   position: absolute;
   inset: 0;
   width: 100%;
-  /* background-color: var(--clr-overlay); */
+  background-color: var(--clr-overlay);
   padding: 0 1rem;
   height: 0;
   transform: translateX(100%);
@@ -407,7 +407,7 @@ input {
   background-position: 15%;
   outline: none;
   padding: 1em 1.3em;
-  border: 1px solid var(--clr-dark-gray);
+  border: 2px solid var(--clr-dark-gray);
   border-radius: 1.8em;
   max-width: 7.5em;
   font-size: 1rem;
@@ -506,7 +506,7 @@ input[type=number] {
   inset: 0;
   width: 100%;
   transform: translate(100%);
-  z-index: 1;
+  z-index: 5;
 }
 .show-overlay {
   transform: translate(0%);

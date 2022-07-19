@@ -17,21 +17,15 @@ function navToggle() {
     navContainer.classList.add("toggle-nav");
     menuOpen.style.display = "none";
     menuClose.style.display = "inline";
-    menuBtn
-      .closest("body")
-      .querySelector(".overlay")
-      .classList.add("show-overlay");
+  
   } else {
     navContainer.classList.remove("toggle-nav");
     menuOpen.style.display = "inline";
     menuClose.style.display = "none";
-    menuBtn
-      .closest("body")
-      .querySelector(".overlay")
-      .classList.remove("show-overlay");
   }
+ 
 }
-
+console.log();
 // BOOKMARK
 let bookmarked = false;
 const bookmark = document.querySelector(".bookmark p");
@@ -88,7 +82,7 @@ pledgeBtns.forEach((pledgeBtn) => {
 });
 
 // UPDATE AMOUNT PLEDGED
-// FIRST INPUTS
+// FIRST INPUT
 let rewardlessValue;
 continueBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -101,12 +95,14 @@ continueBtns.forEach((btn) => {
       const closeModal = btn.closest(".modal-container");
       closeModal.style.display = "grid";
     } else {
-      successFunc(rewardless, calculatePledge());
+      successFunc(rewardless);
+      calculatePledge();
       const page = btn.closest("body").querySelector(".appreciation-container");
       page.classList.add("show-appreciation-container");
       const closeModal = btn.closest(".modal-container");
       closeModal.style.display = "none";
     }
+    
   });
 });
 
@@ -154,3 +150,4 @@ function successFunc(input) {
   const errorText = input.parentElement.parentElement.querySelector("small");
   errorText.innerHTML = "";
 }
+
